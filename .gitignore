@@ -1,0 +1,35 @@
+dist
+node_modules
+.DS_Store
+.idea
+
+
+
+# Logs
+logs
+log
+*.log
+
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+
+config.*
+*.map
+
+
+
+/build
+/.externalToolBuilders
+/.metadata
+/.settings
+/RemoteSystemsTempFiles
+/.git
+/.classpath
