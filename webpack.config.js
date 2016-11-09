@@ -36,8 +36,11 @@ module.exports = function(webpackConfig, env) {
       loader.test = /\.css$/;
     }
   });
-  
-  
+
+  webpackConfig.ouput = {
+    path: './dist/',
+    filename: ''
+  };
 
   return webpackConfig;
 };
