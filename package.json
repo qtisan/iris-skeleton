@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "antd": "^2.3.1",
+    "babel-plugin-import": "^1.0.1",
     "base64-min": "^1.1.0",
     "body-parser": "^1.0.0",
     "compression": "^1.6.2",
@@ -15,6 +16,7 @@
     "errorhandler": "^1.0.0",
     "eventproxy": "^0.3.4",
     "express": "^4.0.0",
+    "history": "^4.4.0",
     "jquery": "^2.1.4",
     "md5": "^2.1.0",
     "method-override": "^2.3.6",

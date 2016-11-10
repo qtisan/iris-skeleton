@@ -3,13 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dva Demo</title>
+  <title>大数据应用</title>
   <link rel="stylesheet" href="index.css" />
 </head>
 <body>
 
 <div id="root"></div>
+<script type="text/javascript">
+  var eo = {
 
+    '/statistic/dashboard': {
+      title: '统计首页',
+      data: {
+        '当前服务社总数': 3887,
+        '当前农户总数': 178829
+      }
+    },
+    '/statistic/spread': {
+      title: '服务社所在地分布'
+    }
+  };
+</script>
 <script src="index.js"></script>
 
 </body>
