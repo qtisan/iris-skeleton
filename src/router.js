@@ -4,6 +4,7 @@ import { Router } from 'dva/router';
 
 import Wrapper from './routes/Wrapper';
 import IndexPage from './routes/IndexPage';
+import NotFound from './routes/NotFound';
 import Statistic from './routes/Statistic';
 import { Statistics } from './routes/Statistic';
 
@@ -11,9 +12,11 @@ var routes = {
 
   path: '/',
   component: Wrapper,
-  indexRoute: {component: IndexPage},
-  onEnter() {
-    location.href = '/#/statistic/dashboard';
+  indexRoute: {
+    component: IndexPage,
+    onEnter() {
+      location.href = '#/statistic/dashboard';
+    }
   },
   childRoutes: [
     {
@@ -24,6 +27,10 @@ var routes = {
         { path: 'dashboard', component: Statistics.Dashboard },
         { path: 'spread',  component: Statistics.Spread }
       ]
+    },
+    {
+      path: '*',
+      component: NotFound
     }
   ]
 
@@ -34,3 +41,4 @@ export default function({ history }) {
     <Router history={history} routes={routes} />
   );
 };
+

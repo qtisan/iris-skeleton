@@ -1,51 +1,69 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'dva';
+import ReactEcharts from 'echarts-for-react';
+
+import _ from '../utils';
+import styles from './Statistic.less';
 
 import { Row, Col } from 'antd';
 
 
-const Statistic = (props) => {
+const Statistic = ( {children, menu} ) => {
   return <div className="iris-layout-statistic">
-    Statistic
-    {props.children}
+    <h1>Statistic - {eo[menu.currentKey].title}</h1>
+    <hr />
+    {children}
   </div>;
 };
-Statistic.propTypes = {};
 
 
-const Dashboard = (props) => {
+const Dashboard = ({item}) => {
+  console.log(item);
   return <div className="iris-statistic-default">
-    <Row>
-      <Col span={24}>
-
-      </Col>
-    </Row>
+    {
+      _.map(
+        item.data, (i, k) =>
+          <Row key={k} style={{marginBottom: 20, borderBottom: 'solid 1px #eee'}}>
+            <h3 style={{color: '#aaa'}}>{k}</h3>
+            <h1>{i}<em style={{fontSize: 16, color: '#999'}}>个</em></h1>
+          </Row>
+      )
+    }
   </div>;
 };
 Dashboard.propTypes = {};
 
-
-
-const Spread = () => {
+const Spread = ({item}) => {
 
   return (
     <div>
-      <h1>Spread</h1>
+      {
+        _.map(
+          item.data, (i, k) =>
+            <Row key={k} style={{marginBottom: 20, borderBottom: 'solid 1px #eee'}}>
+              <h3 style={{color: '#aaa'}}>{k}</h3>
+              <h1>{i}<em style={{fontSize: 16, color: '#999'}}>个</em></h1>
+            </Row>
+        )
+      }
+      <Row>
+        <ReactEcharts option={item.options} />
+      </Row>
     </div>
   );
-
 };
 
-const mapStateToProps = (state, props) => {
+function mapStateToProps({menu}){
   return {
-    item: state.item
+    item: eo[menu.currentKey],
+    menu: menu
   }
-};
+}
 
 export const Statistics = {
   Dashboard: connect(mapStateToProps)(Dashboard),
   Spread: connect(mapStateToProps)(Spread)
 };
 
-export default connect()(Statistic);
+export default connect(mapStateToProps)(Statistic);
 

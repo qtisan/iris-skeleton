@@ -176,6 +176,10 @@ const utils = {
 
   htmlEscape(html) {
     return html.replace(/<[^>]*>/g, '');
+  },
+
+  getCurrentPath() {
+    return location.hash.slice(1).split('?')[0];
   }
 
 };

@@ -11,7 +11,6 @@
 <div id="root"></div>
 <script type="text/javascript">
   var eo = {
-
     '/statistic/dashboard': {
       title: '统计首页',
       data: {
@@ -20,6 +19,99 @@
       }
     },
     '/statistic/spread': {
+      title: '服务社所在地分布',
+      data: {
+        '当前服务社总数': 3887
+      },
+      options: {
+        backgroundColor: '#2c343c',
+
+        title: {
+          text: 'Customized Pie',
+          left: 'center',
+          top: 20,
+          textStyle: {
+            color: '#ccc'
+          }
+        },
+
+        tooltip : {
+          trigger: 'item',
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+
+        visualMap: {
+          show: false,
+          min: 80,
+          max: 600,
+          inRange: {
+            colorLightness: [0, 1]
+          }
+        },
+        series : [
+          {
+            name:'访问来源',
+            type:'pie',
+            radius : '55%',
+            center: ['50%', '50%'],
+            data:[
+              {value:335, name:'直接访问'},
+              {value:310, name:'邮件营销'},
+              {value:274, name:'联盟广告'},
+              {value:235, name:'视频广告'},
+              {value:400, name:'搜索引擎'}
+            ].sort(function (a, b) { return a.value - b.value}),
+            roseType: 'angle',
+            label: {
+              normal: {
+                textStyle: {
+                  color: 'rgba(255, 255, 255, 0.3)'
+                }
+              }
+            },
+            labelLine: {
+              normal: {
+                lineStyle: {
+                  color: 'rgba(255, 255, 255, 0.3)'
+                },
+                smooth: 0.2,
+                length: 10,
+                length2: 20
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: '#c23531',
+                shadowBlur: 200,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      }
+    },
+    '/statistic/permeation': {
+      title: '服务社渗透率情况'
+    },
+    '/statistic/farmers': {
+      title: '农户分布统计'
+    },
+    '/statistic/increase': {
+      title: '农户开卡量统计'
+    },
+    '/statistic/supply': {
+      title: '商品供应类别分布'
+    },
+    '/statistic/county': {
+      title: '代农户销售农产品10强县'
+    },
+    '/statistic/point': {
+      title: '代农户销售农产品20强服务社'
+    },
+    '/statistic/sale': {
+      title: '代农户销售农产品统计'
+    },
+    '/statistic/requirement': {
       title: '服务社所在地分布'
     }
   };

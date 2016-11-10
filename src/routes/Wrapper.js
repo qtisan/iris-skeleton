@@ -1,20 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
 import _ from '../utils'
+import { routerRedux } from 'dva/router';
 
 import styles from '../index.less';
 import wrapperStyles from './Wrapper.less';
 
 import hint from '../utils/hint';
 
-import { Menu, Breadcrumb, Icon } from 'antd';
+import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 
-const Wrapper = (props) => {
+const Wrapper = ({menus, dispatch, children, currentKey}) => {
 
   const menuSelect = (item) => {
-    props.dispatch(routerRedux.push(item.key));
+    dispatch({
+      type: 'menu/redirect',
+      payload: item
+    });
+    dispatch(routerRedux.push(item.key));
   };
 
   return (
@@ -42,18 +46,18 @@ const Wrapper = (props) => {
         </div>
         <div className="iris-layout-container">
           <aside className="iris-layout-sider">
-            <Menu mode="inline" defaultSelectedKeys={['/statistic/dashboard']} defaultOpenKeys={['sub1']} onSelect={menuSelect}>
+            <Menu mode="inline" defaultSelectedKeys={[currentKey]} defaultOpenKeys={['sub1']} onSelect={menuSelect}>
               <SubMenu key="sub1" title={<span><Icon type="dot-chart" />统计报表</span>}>
                 {
-                  _.map(eo, (item, key) => <Menu.Item key={key}>{item.title}</Menu.Item>)
+                  _.map(menus, (item, key) => <Menu.Item key={key}>{item.title}</Menu.Item>)
                 }
               </SubMenu>
             </Menu>
           </aside>
           <div className="iris-layout-content">
-            <div style={{ height: 240 }}>
+            <div style={{ minHeight: 600 }}>
               <div style={{clear: 'both'}}>
-                {props.children}
+                {children}
               </div>
             </div>
           </div>
@@ -67,4 +71,11 @@ const Wrapper = (props) => {
 
 Wrapper.propTypes = {};
 
-export default connect()(Wrapper);
+function mapStateToProps( { menu } ) {
+  return {
+    menus: menu.items,
+    currentKey: menu.currentKey
+  };
+}
+
+export default connect(mapStateToProps)(Wrapper);
