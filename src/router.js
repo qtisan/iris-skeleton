@@ -25,7 +25,9 @@ var routes = {
       indexRoute: {component: Statistics.Dashboard},
       childRoutes: [
         { path: 'dashboard', component: Statistics.Dashboard },
-        { path: 'spread',  component: Statistics.Spread }
+        { path: 'spread',  component: Statistics.Spread },
+        { path: 'farmers',  component: Statistics.Farmers },
+        { path: 'supply',  component: Statistics.Supply }
       ]
     },
     {
