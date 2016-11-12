@@ -13,10 +13,7 @@ var routes = {
   path: '/',
   component: Wrapper,
   indexRoute: {
-    component: IndexPage,
-    onEnter() {
-      location.href = '#/statistic/dashboard';
-    }
+    component: IndexPage
   },
   childRoutes: [
     {
@@ -25,9 +22,7 @@ var routes = {
       indexRoute: {component: Statistics.Dashboard},
       childRoutes: [
         { path: 'dashboard', component: Statistics.Dashboard },
-        { path: 'spread',  component: Statistics.Spread },
-        { path: 'farmers',  component: Statistics.Farmers },
-        { path: 'supply',  component: Statistics.Supply }
+        { path: ':common',  component: Statistics.Common }
       ]
     },
     {
@@ -43,4 +38,3 @@ export default function({ history }) {
     <Router history={history} routes={routes} />
   );
 };
-

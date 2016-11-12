@@ -14,7 +14,8 @@
   /*
   --------------从这里开始修改----------------------------------------
   */
-  var de = {
+
+  window.de = {
     dashboard: {
       title: '统计首页',
       text: {
@@ -25,9 +26,10 @@
     spread: {
       title: '服务社所在地分布',
       text: {
-        '当前服务社总数': 3887,
+        '当前服务社总数': '3887 个',
         '当前服务社平均渗透率（开办服务社占总行政村百分比）': '38.23%'
       },
+      info: '服务社渗透率TOP排名(%)',
       data: [
         // value格式 [经度, 纬度, 服务社数量, 行政村数量]
         { name: '六盘水', value: [104.838511,26.60012,1100,2293] },
@@ -35,299 +37,127 @@
         { name: '遵义', value: [106.917405,28.341173,200,442] },
         { name: '安顺', value: [105.950035,26.059904,170,234] },
         { name: '铜仁', value: [109.195874,27.738038,140,633] },
-        { name: '毕节', value: [105.699055,27.319257,20,342] },
+        { name: '毕节', value: [105.699055,27.519257,20,342] },
         { name: '黔西南', value: [104.923506,25.164017,330,618] },
         { name: '黔东南', value: [108.348058,26.577451,40,832] },
-        { name: '黔南', value: [107.123923,26.015639,200,299] }
+        { name: '黔南', value: [107.823923,25.815639,200,299] }
       ]
     },
     farmers: {
       title: '农户开卡量统计',
       text: {
-        '农户总开卡数': 98821
+        '农户总开卡数': '98821 户'
       },
       data: {
-        // x2016按顺序对应data2016的数值
-        t2016: '本年度开卡农户统计（2016年）',
-        x2016: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月'],
-        data2016: [ 537, 772, 847, 1332, 1887, 1023, 983, 719, 533, 984 ],
-        // x201611按顺序对应data201611的数值
-        t201611: '本月度开卡农户统计（2016年11月）',
-        x201611: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
-        data201611: [23,4,56,2,12,44,23,34,62,22,5]
+        // 2016年按顺序[xYear]和[dataYear]对应的开卡数量
+        tYear: '本年度开卡农户统计（2016年）',
+        xYear: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        dataYear: [ 537, 772, 847, 1332, 1887, 1023, 983, 719, 533, 984 ],
+        // 2016年11月按顺序[tMonth]和[xMonth]对应的开卡数量
+        tMonth: '本月度开卡农户统计（2016年11月）',
+        xMonth: ['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日','11日','12日','13日','14日','15日','16日','17日','18日','19日','20日','21日','22日','23日','24日','25日','26日','27日','28日','29日','30日'],
+        dataMonth: [23,4,56,2,12,44,23,34,62,22,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
       }
     },
     supply: {
-      title: '商品供应类别分布'
+      title: '农村商品供应类别分布',
+      text: {
+        '采集农村供应商品数量': '2283 项'
+      },
+      data: [
+        // 供应商品数量值，对应类别，可以按照格式增减
+        {value:795, name:'蛋奶粮油'},
+        {value:349, name:'家禽'},
+        {value:175, name:'农副产品'},
+        {value:325, name:'水果'},
+        {value:520, name:'蔬菜'},
+        {value:119, name:'手工业品'}
+      ]
+    },
+    sale: {
+      title: '代农户销售农产品统计',
+      text: {
+        '今年总销量（2016年）': '￥ 323479',
+        '本月销量（2016年11月）': '￥ 32736'
+      },
+      data: {
+        years: [ '2016年', '2015年' ],
+        months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        // 2016年1月-12月对应的销售额
+        sYear: [28872,36322,13882,19903,26637,38887,48873,32217,45665,28893,32736,0],
+        // 2015年1月-12月对应的销售额
+        sLastYear: [7223,2381,8411,11238,8773,11731,11009,9318,9339,7632,10092,11192]
+      }
+    },
+    county: {
+      title: '代农户销售农产品10强县',
+      info: '2016年代农户销售农产品数额（元）',
+      data: [
+        // 前10的县对应的销售额，自动排序
+        {name: '松桃县', value: 184203},
+        {name: '沿河县', value: 213489},
+        {name: '石阡县', value: 290034},
+        {name: '玉屏县', value: 204970},
+        {name: '长顺县', value: 231744},
+        {name: '瓮安县', value: 330230},
+        {name: '惠水县', value: 273621},
+        {name: '赫章县', value: 432992},
+        {name: '纳雍县', value: 223112},
+        {name: '大方县', value: 329111}
+      ]
+    },
+    point: {
+      title: '代农户销售农产品20强服务社',
+      info: '2016年代农户销售农产品数额（元）',
+      data: [
+        // 前20的服务社对应的销售额，自动排序
+        {name: '当摆村服务社', value: 84203},
+        {name: '妙湾村服务社', value: 23489},
+        {name: '瓦厂村服务社', value: 90034},
+        {name: '桂芽村服务社', value: 54970},
+        {name: '田坝村服务社', value: 31744},
+        {name: '平头司村服务社', value: 30230},
+        {name: '莲塘村服务社', value: 23621},
+        {name: '地容村服务社', value: 42992},
+        {name: '世昌村服务社', value: 23112},
+        {name: '河界营村服务社', value: 29111},
+        {name: '道水村服务社', value: 63743},
+        {name: '地哪村服务社', value: 26371},
+        {name: '地安村服务社', value: 22321},
+        {name: '凯保村服务社', value: 43512},
+        {name: '园埂脚村服务社', value: 54222},
+        {name: '普觉村服务社', value: 22455},
+        {name: '粑坳村服务社', value: 35577},
+        {name: '当造村服务社', value: 34222},
+        {name: '臭脑村服务社', value: 36754},
+        {name: '团结村服务社', value: 62111}
+      ]
+    },
+    requirement: {
+      title: '满足农村需求量统计',
+      text: {
+        '农村总需求量（2016年）': '735 项',
+        '配送商品满足农村需求量（2016年）': '662 项',
+        '本年度需求满足率': '90.0%'
+      },
+      data: {
+        series: ['农村总需求量', '满足需求数量'],
+        categories: ['数码/手机', '家用电器', '图书/音像', '母婴/保健', '汽车/汽车用品', '服饰/箱包', '家居/家装', '食品/酒水'],
+        // 总共需求数量，与[categories]相对应
+        rTotal: [231,98,15,33,18,89,79,172],
+        // 满足的需求数量，与[categories]相对应
+        rFill: [209,78,15,30,18,77,66,169]
+      }
     }
   };
-
 
   /*
    --------------修改结束，以下不用动----------------------------------------
    */
 
-
-
-
-
-
-  var getPercent = function (v1, v2) {
-    return (Number.parseFloat(v1) / Number.parseFloat(v2) * 100).toFixed(2);
-  };
-
-  var getNameDesc = function (ar) {
-    var res = [ ];
-    ar.sort(function (a, b) {
-      return getPercent(a.value[2], a.value[3]) - getPercent(b.value[2], b.value[3]);
-    });
-    for (var i = 0; i < ar.length; i ++) {
-      res.push(ar[i].name);
-    }
-    return res;
-  };
-
-  var getValueIDesc = function (ar, func) {
-    var res = [ ];
-    ar.sort(function (a, b) {
-      return getPercent(a.value[2], a.value[3]) - getPercent(b.value[2], b.value[3]);
-    });
-    for (var i = 0; i < ar.length; i ++) {
-      res.push(func(ar[i].value));
-    }
-    return res;
-  };
-
-  var eo = {
-    '/statistic/dashboard': {
-      title: de.dashboard.title,
-      data: de.dashboard.text
-    },
-    '/statistic/spread': {
-      title: de.spread.title,
-      data: de.spread.text,
-      options: {
-        backgroundColor: '#404a59',
-        tooltip : {
-          trigger: 'item'
-        },
-        legend: {
-          orient: 'vertical',
-          y: 'bottom',
-          x:'right',
-          data:['服务社总数'],
-          textStyle: {
-            color: '#fff'
-          }
-        },
-        geo: {
-          map: '贵州',
-          left: 60,
-          roam: true,
-          itemStyle: {
-            normal: {
-              areaColor: '#323c48',
-              borderColor: '#111'
-            },
-            emphasis: {
-              areaColor: '#2a333d',
-              show: false
-            }
-          }
-        },
-        brush: {
-          outOfBrush: {
-            color: '#abc'
-          },
-          brushStyle: {
-            borderWidth: 2,
-            color: 'rgba(0,0,0,0.2)',
-            borderColor: 'rgba(0,0,0,0.5)',
-          },
-          seriesIndex: [0, 1],
-          throttleType: 'debounce',
-          throttleDelay: 300,
-          geoIndex: 0
-        },
-        grid: {
-          right: 40,
-          top: 100,
-          bottom: 40,
-          width: '30%'
-        },
-        xAxis: {
-          type: 'value',
-          scale: true,
-          position: 'top',
-          boundaryGap: false,
-          splitLine: {show: false},
-          axisLine: {show: false},
-          axisTick: {show: false},
-          axisLabel: {margin: 2, textStyle: {color: '#aaa'}, show: true}
-        },
-        yAxis: {
-          type: 'category',
-          name: '服务社渗透率TOP排名(%)',
-          nameGap: 16,
-          axisLine: {show: false, lineStyle: {color: '#ddd'}},
-          axisTick: {show: false, lineStyle: {color: '#ddd'}},
-          data: getNameDesc(de.spread.data)
-        },
-        series : [
-          {
-            type: 'effectScatter',
-            coordinateSystem: 'geo',
-            symbolSize: function (val) {
-              return val[2] / 60;
-            },
-            showEffectOn: 'render',
-            rippleEffect: {
-              brushType: 'stroke'
-            },
-            hoverAnimation: true,
-            label: {
-              normal: {
-                formatter: function (params) {
-                  var v = params.value.toString().split(','),
-                    r = getPercent(v[2], v[3]);
-                  return params.name + '\n' +
-                    '服务社' + v[2] + '个\n' +
-                    '行政村' + v[3] + '个\n' +
-                    '渗透率' + r + '%';
-                },
-                position: 'bottom',
-                show: true
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: '#f4e925',
-                shadowBlur: 10,
-                shadowColor: '#333'
-              }
-            },
-            zlevel: 1,
-            data: de.spread.data
-          },
-          {
-            id: 'bar',
-            zlevel: 2,
-            type: 'bar',
-            symbol: 'none',
-            itemStyle: {
-              normal: {
-                color: '#ddb926'
-              }
-            },
-            label: {
-              normal: {
-                show: true,
-                position: 'right'
-              }
-            },
-            data: getValueIDesc(de.spread.data, function (v) {
-              return getPercent(v[2], v[3]);
-            })
-          }
-        ]
-      }
-    },
-    '/statistic/farmers': {
-      title: de.farmers.title,
-      data: de.farmers.text,
-      options: {
-        grid: [
-          {x: '7%', y: '7%', width: '85%', height: '38%'},
-          {x: '7%', y2: '7%', width: '85%', height: '38%'}
-        ],
-        tooltip: {
-          trigger: 'axis'
-        },
-        legend: {
-          data: [ de.farmers.data.t201611, de.farmers.data.t2016 ]
-        },
-        xAxis: [
-          {
-            gridIndex: 0,
-            type: 'category',
-            boundaryGap: false,
-            data: de.farmers.data.x201611
-          },
-          {
-            gridIndex: 1,
-            type: 'category',
-            boundaryGap: false,
-            data: de.farmers.data.x2016
-          }
-        ],
-        yAxis: [
-          {
-            gridIndex: 0,
-            type: 'value'
-          },
-          {
-            gridIndex: 1,
-            type: 'value'
-          }
-        ],
-        series: [
-          {
-            name:de.farmers.data.t201611,
-            type:'line',
-            xAxisIndex: 0,
-            yAxisIndex: 0,
-            stack: '总量',
-            data:de.farmers.data.data201611
-          },
-          {
-            name:de.farmers.data.t2016,
-            type:'line',
-            xAxisIndex: 1,
-            yAxisIndex: 1,
-            stack: '总量',
-            data:de.farmers.data.data2016
-          }
-        ]
-      }
-    },
-    '/statistic/supply': {
-      title: de.supply.title,
-      options: {
-        series: [
-          {
-            name:'面积模式',
-            type:'pie',
-            radius : [10, 210],
-            roseType : 'area',
-            data:[
-              {value:10, name:'rose1'},
-              {value:5, name:'rose2'},
-              {value:15, name:'rose3'},
-              {value:25, name:'rose4'},
-              {value:20, name:'rose5'},
-              {value:35, name:'rose6'},
-              {value:30, name:'rose7'},
-              {value:40, name:'rose8'}
-            ]
-          }
-        ]
-      }
-    },
-    '/statistic/county': {
-      title: '代农户销售农产品10强县'
-    },
-    '/statistic/point': {
-      title: '代农户销售农产品20强服务社'
-    },
-    '/statistic/sale': {
-      title: '代农户销售农产品统计'
-    },
-    '/statistic/requirement': {
-      title: '服务社所在地分布'
-    }
-  };
 </script>
 <script src="index.js"></script>
 
 </body>
 </html>
+

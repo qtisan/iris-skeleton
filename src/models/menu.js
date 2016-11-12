@@ -1,5 +1,6 @@
 
 import _ from '../utils';
+import eo from '../services/statistic';
 
 export default {
 
@@ -32,7 +33,6 @@ export default {
       return { ...state, ...action.payload };
     },
     redirect(state, action) {
-      console.log({ ...state, currentKey: action.payload.key });
       return { ...state, currentKey: action.payload.key };
     }
   }

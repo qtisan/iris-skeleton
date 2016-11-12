@@ -6,7 +6,7 @@ import styles from '../index.less';
 function IndexPage() {
   return (
     <div className={styles.normal}>
-      <h1 className={styles.title}>Yay! Welcome to dva!</h1>
+      <h1 className={styles.title}>请点击左侧列表菜单查看统计报表</h1>
     </div>
   );
 }
