@@ -22,7 +22,8 @@ var app = express(),
 require('./utils/global');
 
 
-app.set('port', ARGS[0] || config.httpPort || 3000);
+app.set('port', ARGS[0] || config.httpPort || 60080);
+app.set('https_port', config.httpsPort || 60443);
 
 var logPath = path.join(__dirname, 'logs'),
 	logFilePath = path.join(logPath, 'access.log');
@@ -53,30 +54,35 @@ if (app.get('env') === 'development') {
 	app.use(errorHandler());
 }
 
-http.createServer(app).listen(app.get('port'), function () {
+config.httpOn && http.createServer(app).listen(app.get('port'), function () {
   console.log('Server listening on port ' + app.get('port'));
-});
-https.createServer({
+}) || console.log('http server is off...');
+
+config.httpsOn && https.createServer({
   key: fs.readFileSync(config.httpsKeys.key),
   crt: fs.readFileSync(config.httpsKeys.crt)
-}, app).listen(443, function () {
-  console.log('With https listening...');
-});
+}, app).listen(app.get('https_port'), function () {
+  console.log('https server is listening on port ' + app.get('https_port'));
+}) || console.log('https server is off...');
 
 
 /*
-# Nginx Htpps Configuration
 
-server_name sample.com;
-ssl on;
-ssl_certificate /path/to/server.crt;
-ssl_certificate_key /path/to/server.key;
-ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-ssl_ciphers "EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4EECDH EDH+aRSA RC4 !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !MEDIUM";
-
-# Add perfect forward secrecy
-ssl_prefer_server_ciphers on;
-add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+ server {
+ listen 443 ssl;
+ server_name enneagram.youkezhong.com;
+ location / {
+ proxy_pass https://enneagram.youkezhong.com;
+ }
+ # Nginx Https Configuration
+ ssl on;
+ ssl_certificate /ocdata/iris/server/secure/keys/server.pem;
+ ssl_certificate_key /ocdata/iris/server/secure/keys/server.key;
+ ssl_session_timeout 5m;
+ ssl_protocols SSLv3 TLSv1;
+ ssl_ciphers HIGH:!ADH:!EXPORT56:RC4+RSA:+MEDIUM;
+ ssl_prefer_server_ciphers on;
+ }
 
 */
 
