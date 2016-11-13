@@ -53,13 +53,13 @@ if (app.get('env') === 'development') {
 	app.use(errorHandler());
 }
 
-http.createServer(app.get('port'), function () {
+http.createServer(app).listen(app.get('port'), function () {
   console.log('Server listening on port ' + app.get('port'));
 });
 https.createServer({
   key: fs.readFileSync(config.httpsKeys.key),
   crt: fs.readFileSync(config.httpsKeys.crt)
-}, app, function () {
+}, app).listen(443, function () {
   console.log('With https listening...');
 });
 
