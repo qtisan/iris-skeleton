@@ -13,13 +13,16 @@ var express = require('express'),
 	errorHandler = require('errorhandler'),
 	fs = require('fs');
 
+var https = require('https'),
+  http = require('http');
 
-var app = express();
+var app = express(),
+  config = require('./config');
 
 require('./utils/global');
 
 
-app.set('port', ARGS[0] || 3000);
+app.set('port', ARGS[0] || config.httpPort || 3000);
 
 var logPath = path.join(__dirname, 'logs'),
 	logFilePath = path.join(logPath, 'access.log');
@@ -50,7 +53,14 @@ if (app.get('env') === 'development') {
 	app.use(errorHandler());
 }
 
-
-app.listen(app.get('port'), function () {
-	console.log('Express server listening on port ' + app.get('port'));
+http.createServer(app.get('port'), function () {
+  console.log('Server listening on port ' + app.get('port'));
 });
+https.createServer({
+  key: fs.readFileSync(config.httpsKeys.key),
+  crt: fs.readFileSync(config.httpsKeys.crt)
+}, app, function () {
+  console.log('With https listening...');
+});
+
+
