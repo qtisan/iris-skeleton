@@ -64,3 +64,19 @@ https.createServer({
 });
 
 
+/*
+# Nginx Htpps Configuration
+
+server_name sample.com;
+ssl on;
+ssl_certificate /path/to/server.crt;
+ssl_certificate_key /path/to/server.key;
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+ssl_ciphers "EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4EECDH EDH+aRSA RC4 !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !MEDIUM";
+
+# Add perfect forward secrecy
+ssl_prefer_server_ciphers on;
+add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+
+*/
+
