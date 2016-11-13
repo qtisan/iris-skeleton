@@ -33,3 +33,12 @@ config.*
 /RemoteSystemsTempFiles
 /.git
 /.classpath
+
+
+# secure keys
+*.key
+*.pem
+*.crt
+*.csr
+*.srl
+
