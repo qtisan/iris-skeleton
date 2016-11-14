@@ -15,7 +15,7 @@ router.post('/save', function (req, res, next) {
   }
   try {
     var json = req.body.user;
-    var user = JSON.parse(json), date = new Date();
+    var user = JSON.parse(json);
     var filePath = path.join(dirPath, moment().format('YYYYMMDDhhmmss') + user.username + '-' + IdGenerator.newUuid() + '.enneagram');
     fs.writeFile(filePath, json, function (err) {
       if (err) {
@@ -33,4 +33,4 @@ router.post('/save', function (req, res, next) {
 });
 
 
-module.exports = indexRouter;
+module.exports = router;
