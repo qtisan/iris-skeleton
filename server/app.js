@@ -60,7 +60,7 @@ config.httpOn && http.createServer(app).listen(app.get('port'), function () {
 
 config.httpsOn && https.createServer({
   key: fs.readFileSync(config.httpsKeys.key),
-  crt: fs.readFileSync(config.httpsKeys.crt)
+  cert: fs.readFileSync(config.httpsKeys.cert)
 }, app).listen(app.get('https_port'), function () {
   console.log('https server is listening on port ' + app.get('https_port'));
 }) || console.log('https server is off...');
